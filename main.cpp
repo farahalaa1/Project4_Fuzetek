@@ -59,6 +59,9 @@ public:
         TrieNode* current = root;
         for (int i = 0; i < (int)word.size(); i++) {
             int index = word[i] - 'a';
+            if (index < 0 || index >= 26) {
+                return false;
+            }
             if (current->children[index] == nullptr) {
                 return false;
             }
