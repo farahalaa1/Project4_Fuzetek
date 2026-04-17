@@ -107,10 +107,21 @@ public:
     // Input: word to search for (string)
     // Output: boolean indicating if the word exists
     // Purpose: Check if the complete word exists in the Trie
-    bool search(string word)
-    {
-        // TODO: Implement this function
-        return false; // placeholder
+
+
+    bool search(string word) {
+        TrieNode* current = root;
+        for (int i = 0; i < (int)word.size(); i++) {
+            int index = word[i] - 'a';
+            if (index < 0 || index >= 26) {
+                return false;
+            }
+            if (current->children[index] == nullptr) {
+                return false;
+            }
+            current = current->children[index];
+        }
+        return current->isEndOfWord;
     }
 
     // Check if any word starts with the given prefix
@@ -131,7 +142,7 @@ public:
     {
         vector<string> suggestions;
         // TODO: Implement this function
-   
+
             TrieNode* current = root;
 
             for (char c : prefix)
@@ -139,7 +150,7 @@ public:
                 c = tolower(c);
                 int index = c - 'a';
 
-                if (index < 0 || index >= 26 || current->children[index] == nullptr) 
+                if (index < 0 || index >= 26 || current->children[index] == nullptr)
                 {
                     return suggestions;
                 }
@@ -150,7 +161,7 @@ public:
             findAllWords(current, prefix, suggestions);
 
         return suggestions;
-   
+
 };
 
 // Main function
