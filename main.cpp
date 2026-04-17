@@ -175,6 +175,7 @@ public:
             findAllWords(current, prefix, suggestions);
 
         return suggestions;
+    }
 
 };
 
