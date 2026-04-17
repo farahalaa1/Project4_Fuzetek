@@ -131,8 +131,26 @@ public:
     {
         vector<string> suggestions;
         // TODO: Implement this function
+   
+            TrieNode* current = root;
+
+            for (char c : prefix)
+            {
+                c = tolower(c);
+                int index = c - 'a';
+
+                if (index < 0 || index >= 26 || current->children[index] == nullptr) 
+                {
+                    return suggestions;
+                }
+
+                current = current->children[index];
+            }
+
+            findAllWords(current, prefix, suggestions);
+
         return suggestions;
-    }
+   
 };
 
 // Main function
